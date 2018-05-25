@@ -9,18 +9,23 @@
   ctx.width = 800;
 
   ws.onmessage = function(e) {
-    liveDraw(e.data);
+    ctx.fillStyle = (parseInt(e.data)) ? '#ffffff' : '#000000';
+    ctx.fillRect(currentX, currentY, 1, 1);
+    ++currentX;
+    if (currentX >= 800) {
+      currentX = 0;
+      ++currentY;
+    }
   };
 
-  function liveDraw(byte) {
-    if (currentX < ctx.width && currentY <= ctx.height) {
-      ctx.fillStyle = (parseInt(byte) === 1) ? '#000000' : '#ffffff';
-      ctx.fillRect(currentX, currentY, 1, 1);
-      currentX++;
-    } else {
-      currentX = 0;
-      currentY++;
-    }
-  }
+  // function liveDraw(byte) {
+  //   ctx.fillStyle = (parseInt(byte)) ? '#ffffff' : '#000000';
+  //   ctx.fillRect(currentX, currentY, 1, 1);
+  //   ++currentX;
+  //   if (currentX >= 800) {
+  //     currentX = 0;
+  //     ++currentY;
+  //   }
+  // }
 
 })(document);
